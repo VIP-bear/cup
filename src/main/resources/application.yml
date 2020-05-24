@@ -14,4 +14,4 @@ spring:
         # 格式化sql语句
         format_sql: true
 server:
-  port: 8082
+  port: 9528

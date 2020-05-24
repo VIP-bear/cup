@@ -5,7 +5,7 @@ import com.bear.cup.controller.param.UserRegisterReq;
 import com.bear.cup.dao.entity.UserEntity;
 import com.bear.cup.dao.repo.UserRepository;
 import com.bear.cup.enums.UserTypeEnum;
-import com.bear.cup.service.UserService;
+import com.bear.cup.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * 封装业务逻辑
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
