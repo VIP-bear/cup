@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -102,6 +103,11 @@ public class ProductServiceImpl implements IProductService {
         return products;
     }
 
+    /**
+     * 根据商品id查找商品
+     * @param id
+     * @return
+     */
     @Override
     public DetailProduct findProductById(Long id) {
         Optional<ProductEntity> byId = productRepository.findById(id);
@@ -112,5 +118,36 @@ public class ProductServiceImpl implements IProductService {
         Date date = new Date(productEntity.getProduct_publish_time());
         product.setProduct_publish_time(date.toString());
         return product;
+    }
+
+    /**
+     * 根据商品id查找商品数量
+     * @param id
+     * @return
+     */
+    @Override
+    public int getProductNum(Long id) {
+        int productNum = productRepository.getProductNumById(id);
+        return productNum;
+    }
+
+    /**
+     * 修改商品剩余数量
+     * @param restNum
+     */
+    @Transactional
+    @Override
+    public void updateProductNum(Long productId, int restNum) {
+        productRepository.updateProductNum(productId, restNum);
+    }
+
+    /**
+     * 根据id删除商品
+     * @param product_id
+     */
+    @Transactional
+    @Override
+    public void deleteProductById(Long product_id) {
+        productRepository.deleteById(product_id);
     }
 }

@@ -16,4 +16,10 @@ public interface IProductService {
     List<Product> searchProduct(String productName);
 
     DetailProduct findProductById(Long id);
+
+    int getProductNum(Long id);
+
+    void updateProductNum(Long productId, int restNum);
+
+    void deleteProductById(Long product_id);
 }

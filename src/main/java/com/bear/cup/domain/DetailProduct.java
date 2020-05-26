@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class DetailProduct {
 
+    private Long id;
+
     private String product_name;
 
     private String product_pic_url;
