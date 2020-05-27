@@ -68,7 +68,7 @@ public class ProductEntity {
 
     /**
      * 产品审核状态
-     * 0:审核中,1:发布成功,2:发布失败
+     * 0:审核中,1:发布成功
      */
     @Column
     private int product_check;

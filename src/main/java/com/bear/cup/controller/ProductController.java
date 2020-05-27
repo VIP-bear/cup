@@ -75,4 +75,15 @@ public class ProductController {
         return productService.findProductById(id);
     }
 
+    /**
+     * 获取待审核的商品
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/admin/product/check/{page}/{size}")
+    public Page<Product> findProductCheck(@PathVariable("page")int page,
+                                          @PathVariable("size")int size) {
+        return productService.findProductCheck(page, size);
+    }
+
 }

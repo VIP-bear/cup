@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,9 @@ public class OrderServiceImpl implements IOrderService {
         for (OrderEntity orderEntity : orderEntities) {
             Order order = new Order();
             BeanUtils.copyProperties(orderEntity, order);
+            // 时间转换成字符串
+            Date date = new Date(orderEntity.getOrder_time());
+            order.setOrder_time(date.toString());
             orderList.add(order);
         }
         return orderList;
@@ -84,11 +88,12 @@ public class OrderServiceImpl implements IOrderService {
     /**
      * 保存全部订单
      * @param orderReqList
+     * @param username
      * @return
      */
     @Transactional
     @Override
-    public String saveAllOrder(List<OrderReq> orderReqList) {
+    public String saveAllOrder(List<OrderReq> orderReqList, String username) {
 
         String message = "购买失败，请重试";
 
@@ -96,6 +101,7 @@ public class OrderServiceImpl implements IOrderService {
         List<OrderEntity> orderEntityList = new ArrayList<>();
         List<Integer> restNums = new ArrayList<>();
         for (OrderReq orderReq : orderReqList) {
+            orderReq.setUsername(username);
             OrderEntity orderEntity = new OrderEntity();
             BeanUtils.copyProperties(orderReq, orderEntity);
             orderEntity.setOrder_time(System.currentTimeMillis());

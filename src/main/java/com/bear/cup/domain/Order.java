@@ -11,13 +11,9 @@ public class Order {
 
     private Long order_id;
 
-    private String username;
-
-    private Long product_id;
-
     private String product_name;
 
-    private Long order_time;
+    private String order_time;
 
     private int product_num;
 

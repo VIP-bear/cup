@@ -11,5 +11,5 @@ public interface IOrderService {
 
     List<Order> findOrderByUsername(String username);
 
-    String saveAllOrder(List<OrderReq> orderReqList);
+    String saveAllOrder(List<OrderReq> orderReqList, String username);
 }

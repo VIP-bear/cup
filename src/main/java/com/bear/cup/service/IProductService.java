@@ -22,4 +22,9 @@ public interface IProductService {
     void updateProductNum(Long productId, int restNum);
 
     void deleteProductById(Long product_id);
+
+    Page<Product> findProductCheck(int page, int size);
+
+    String updateProductCheck(Long productId);
+
 }

@@ -97,7 +97,7 @@ class CupApplicationTests {
 			orderReqList.add(orderReq);
 		}
 
-		String s = orderService.saveAllOrder(orderReqList);
+		String s = orderService.saveAllOrder(orderReqList, "bear");
 		System.out.println(s);
 	}
 

@@ -27,4 +27,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>,
     @Modifying
     @Query(value = "update t_product set product_num = ?2 where id=?1", nativeQuery = true)
     void updateProductNum(Long productId, int restNum);
+
+    @Modifying
+    @Query(value = "update t_product set product_check = 1 where id=?1", nativeQuery = true)
+    void updateProductCheck(Long productId);
 }

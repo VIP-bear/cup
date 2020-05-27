@@ -39,10 +39,11 @@ public class OrderController {
      * @return
      */
     @ResponseBody
-    @PostMapping("/order/saveAll")
-    public String saveAllOrder(@RequestBody List<OrderReq> orderReqList) {
+    @PostMapping("/order/saveAll/{username}")
+    public String saveAllOrder(@RequestBody List<OrderReq> orderReqList,
+                               @PathVariable("username")String username) {
         log.info("orderList: {}", orderReqList);
-        return orderService.saveAllOrder(orderReqList);
+        return orderService.saveAllOrder(orderReqList, username);
     }
 
     /**

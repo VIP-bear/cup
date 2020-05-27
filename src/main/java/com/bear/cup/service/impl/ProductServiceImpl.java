@@ -150,4 +150,42 @@ public class ProductServiceImpl implements IProductService {
     public void deleteProductById(Long product_id) {
         productRepository.deleteById(product_id);
     }
+
+    /**
+     * 获取待审核的商品
+     * @return
+     * @param page
+     * @param size
+     */
+    @Override
+    public Page<Product> findProductCheck(int page, int size) {
+        // 根据时间排序
+        PageRequest pageRequest = PageRequest.of(page, size,
+                Sort.by(Sort.Direction.DESC, "id"));
+        // 构造自定义查询条件(待审核)
+        Specification<ProductEntity> queryCondition = (root, cq, cb) -> cb.equal(root.get("product_check"), 0);
+        // 查询
+        Page<ProductEntity> productEntityPage = productRepository.findAll(queryCondition, pageRequest);
+        List<Product> products = productEntityPage.stream().map(productEntity -> {
+            Product product = new Product();
+            BeanUtils.copyProperties(productEntity, product);
+            Date date = new Date(productEntity.getProduct_publish_time());
+            product.setProduct_publish_time(date.toString());
+            return product;
+        }).collect(Collectors.toList());
+        Page<Product> productPage = new PageImpl(products, pageRequest, productEntityPage.getTotalElements());
+        return productPage;
+    }
+
+    /**
+     * 修改审核状态，审核通过
+     * @param productId
+     * @return
+     */
+    @Transactional
+    @Override
+    public String updateProductCheck(Long productId) {
+        productRepository.updateProductCheck(productId);
+        return "发布成功";
+    }
 }
