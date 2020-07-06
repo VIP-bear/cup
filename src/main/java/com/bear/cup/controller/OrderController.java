@@ -53,7 +53,7 @@ public class OrderController {
      */
     @ResponseBody
     @GetMapping("/order/{username}")
-    public List<Order> findOrderByUsername (@PathVariable("username") String username) {
+    public List<Order> findOrderByUsername(@PathVariable("username") String username) {
         log.info("user:{}", username);
         return orderService.findOrderByUsername(username);
     }

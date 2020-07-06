@@ -32,5 +32,4 @@ public class AdminEntity {
     @Column
     private String password;
 
-
 }

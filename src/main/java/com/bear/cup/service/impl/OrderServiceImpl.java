@@ -105,7 +105,7 @@ public class OrderServiceImpl implements IOrderService {
             OrderEntity orderEntity = new OrderEntity();
             BeanUtils.copyProperties(orderReq, orderEntity);
             orderEntity.setOrder_time(System.currentTimeMillis());
-            orderEntity.setProduct_price(orderReq.getProduct_price() * orderReq.getProduct_num());
+            orderEntity.setTotal_price(orderReq.getProduct_price() * orderReq.getProduct_num());
             int restNum = productService.getProductNum(orderReq.getProduct_id());
             restNum -= orderReq.getProduct_num();
             restNums.add(restNum);
